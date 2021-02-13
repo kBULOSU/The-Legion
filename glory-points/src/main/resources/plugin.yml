@@ -1,0 +1,7 @@
+name: L-GloryPoints
+author: yiatzz
+version: 0.1-ALPHA
+main: br.com.legion.glory.points.GloryPointsPlugin
+
+depend:
+  - API-Spigot
