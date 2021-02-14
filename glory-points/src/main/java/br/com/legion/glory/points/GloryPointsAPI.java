@@ -1,5 +1,7 @@
 package br.com.legion.glory.points;
 
+import java.util.Map;
+
 public class GloryPointsAPI {
 
     public static Double get(String name) {
@@ -48,5 +50,9 @@ public class GloryPointsAPI {
         }
 
         return points0 >= points;
+    }
+
+    public static Map<String, Double> getTop(int index) {
+        return GloryPointsProvider.Repositories.GLORY_POINTS.provide().fetchTop(index);
     }
 }
