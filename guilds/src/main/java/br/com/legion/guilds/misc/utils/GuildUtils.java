@@ -28,19 +28,19 @@ import java.util.stream.Collectors;
 import java.util.stream.Stream;
 
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
-public class FactionUtils {
+public class GuildUtils {
 
-    public static void broadcast(int factionId, String message, GuildRole... roles) {
-        broadcast(factionId, TextComponent.fromLegacyText(message), false, roles);
+    public static void broadcast(int guildId, String message, GuildRole... roles) {
+        broadcast(guildId, TextComponent.fromLegacyText(message), false, roles);
     }
 
-    public static void broadcast(int factionId, BaseComponent[] components, GuildRole... roles) {
-        broadcast(factionId, components, false, roles);
+    public static void broadcast(int guildId, BaseComponent[] components, GuildRole... roles) {
+        broadcast(guildId, components, false, roles);
     }
 
-    public static void broadcast(int factionId, BaseComponent[] components, boolean local, GuildRole... roles) {
+    public static void broadcast(int guildId, BaseComponent[] components, boolean local, GuildRole... roles) {
         if (local) {
-            getUsers(factionId, true, roles).stream()
+            getUsers(guildId, true, roles).stream()
                     .map(user -> Bukkit.getPlayerExact(user.getName()))
                     .filter(Objects::nonNull)
                     .filter(Player::isOnline)
@@ -60,16 +60,16 @@ public class FactionUtils {
 
      */
 
-    public static Set<User> getUsers(int factionId, GuildRole... roles) {
-        return getUsers(factionId, false, roles);
+    public static Set<User> getUsers(int guildId, GuildRole... roles) {
+        return getUsers(guildId, false, roles);
     }
 
-    public static Set<User> getUsers(int factionId, boolean local, GuildRole... roles) {
-        return getUsers(factionId, local, false, roles);
+    public static Set<User> getUsers(int guildId, boolean local, GuildRole... roles) {
+        return getUsers(guildId, local, false, roles);
     }
 
-    public static Set<User> getUsers(int factionId, boolean local, boolean onlineOnly, GuildRole... roles) {
-        Set<GuildUserRelation> relations = GuildsProvider.Cache.Local.USERS_RELATIONS.provide().getByClan(factionId);
+    public static Set<User> getUsers(int guildId, boolean local, boolean onlineOnly, GuildRole... roles) {
+        Set<GuildUserRelation> relations = GuildsProvider.Cache.Local.USERS_RELATIONS.provide().getByClan(guildId);
 
         if (roles == null || roles.length == 0) {
             roles = GuildRole.values();

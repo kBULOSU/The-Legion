@@ -28,11 +28,11 @@ public class GuildUserRelationRepository extends MysqlRepository {
         return query(new SelectGuildUserRelationByUserIdSpec(userId));
     }
 
-    public Set<GuildUserRelation> fetchByGuild(int factionId) {
-        return query(new SelectGuildUsersRelationsByGuildSpec(factionId));
+    public Set<GuildUserRelation> fetchByGuild(int guildId) {
+        return query(new SelectGuildUsersRelationsByGuildSpec(guildId));
     }
 
-    public GuildUserRelation fetchByGuildAndRole(int factionId, GuildRole role) {
-        return query(new SelectGuildUsersRelationsByGuildAndRoleSpec(factionId, role));
+    public GuildUserRelation fetchByGuildAndRole(int guildId, GuildRole role) {
+        return query(new SelectGuildUsersRelationsByGuildAndRoleSpec(guildId, role));
     }
 }

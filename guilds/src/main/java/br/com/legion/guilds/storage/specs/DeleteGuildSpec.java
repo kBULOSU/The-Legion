@@ -12,7 +12,7 @@ import java.sql.Statement;
 @RequiredArgsConstructor
 public class DeleteGuildSpec extends UpdateSqlSpec<Boolean> {
 
-    private final int factionId;
+    private final int guildId;
 
     @Override
     public Boolean parser(int affectedRows) {
@@ -29,7 +29,7 @@ public class DeleteGuildSpec extends UpdateSqlSpec<Boolean> {
 
             PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            statement.setInt(1, factionId);
+            statement.setInt(1, guildId);
 
             return statement;
         };

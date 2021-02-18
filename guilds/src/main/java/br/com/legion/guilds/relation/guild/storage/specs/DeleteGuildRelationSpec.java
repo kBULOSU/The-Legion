@@ -12,7 +12,7 @@ import java.sql.Statement;
 @RequiredArgsConstructor
 public class DeleteGuildRelationSpec extends UpdateSqlSpec<Void> {
 
-    private final int factionId1, factionId2;
+    private final int guildId1, guildId2;
 
     @Override
     public Void parser(int affectedRows) {
@@ -29,8 +29,8 @@ public class DeleteGuildRelationSpec extends UpdateSqlSpec<Void> {
 
             PreparedStatement statement = con.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
 
-            statement.setInt(1, Math.min(factionId1, factionId2));
-            statement.setInt(2, Math.max(factionId1, factionId2));
+            statement.setInt(1, Math.min(guildId1, guildId2));
+            statement.setInt(2, Math.max(guildId1, guildId2));
 
             return statement;
         };

@@ -28,14 +28,14 @@ public class GuildLocalCache implements LocalCache {
         return CACHE_BY_TAG.get(tag.toLowerCase());
     }
 
-    public void invalidateId(int factionId) {
-        Guild guild = CACHE_BY_ID.getIfPresent(factionId);
+    public void invalidateId(int guildId) {
+        Guild guild = CACHE_BY_ID.getIfPresent(guildId);
 
         if (guild != null) {
             CACHE_BY_TAG.invalidate(guild.getTag().toLowerCase());
         }
 
-        CACHE_BY_ID.invalidate(factionId);
+        CACHE_BY_ID.invalidate(guildId);
     }
 
     public void invalidateTag(String tag) {

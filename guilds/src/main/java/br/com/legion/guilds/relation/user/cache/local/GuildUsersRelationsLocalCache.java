@@ -34,12 +34,12 @@ public class GuildUsersRelationsLocalCache implements LocalCache {
         return CACHE_BY_USERS.get(id);
     }
 
-    public Set<GuildUserRelation> getByClan(int factionId) {
-        return CACHE_BY_GUILD.get(factionId);
+    public Set<GuildUserRelation> getByGuild(int guildId) {
+        return CACHE_BY_GUILD.get(guildId);
     }
 
-    public GuildUserRelation getByClanAndRole(int factionId, GuildRole role) {
-        return CACHE_BY_GUILD_AND_ROLE.get(new GuildAndRoleCacheLookup(factionId, role));
+    public GuildUserRelation getByGuildAndRole(int guildId, GuildRole role) {
+        return CACHE_BY_GUILD_AND_ROLE.get(new GuildAndRoleCacheLookup(guildId, role));
     }
 
     /*
@@ -51,11 +51,11 @@ public class GuildUsersRelationsLocalCache implements LocalCache {
         CACHE_BY_USERS.invalidate(userId);
     }
 
-    public void invalidateClan(int factionId) {
-        CACHE_BY_GUILD.invalidate(factionId);
+    public void invalidateClan(int guildId) {
+        CACHE_BY_GUILD.invalidate(guildId);
 
         for (GuildRole role : GuildRole.values()) {
-            CACHE_BY_GUILD_AND_ROLE.invalidate(new GuildAndRoleCacheLookup(factionId, role));
+            CACHE_BY_GUILD_AND_ROLE.invalidate(new GuildAndRoleCacheLookup(guildId, role));
         }
     }
 
