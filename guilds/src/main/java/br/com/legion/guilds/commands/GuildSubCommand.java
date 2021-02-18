@@ -80,7 +80,7 @@ public abstract class GuildSubCommand extends CustomCommand {
 
                     if (argument instanceof NickArgument) {
 
-                        Set<GuildUserRelation> relations = GuildsProvider.Cache.Local.USERS_RELATIONS.provide().getByClan(relation.getGuildId());
+                        Set<GuildUserRelation> relations = GuildsProvider.Cache.Local.USERS_RELATIONS.provide().getByGuild(relation.getGuildId());
 
                         Set<String> nicks = relations.stream()
                                 .map(_rel -> ApiProvider.Cache.Local.USERS.provide().get(_rel.getUserId()))

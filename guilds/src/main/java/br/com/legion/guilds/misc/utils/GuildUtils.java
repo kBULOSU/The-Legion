@@ -69,7 +69,7 @@ public class GuildUtils {
     }
 
     public static Set<User> getUsers(int guildId, boolean local, boolean onlineOnly, GuildRole... roles) {
-        Set<GuildUserRelation> relations = GuildsProvider.Cache.Local.USERS_RELATIONS.provide().getByClan(guildId);
+        Set<GuildUserRelation> relations = GuildsProvider.Cache.Local.USERS_RELATIONS.provide().getByGuild(guildId);
 
         if (roles == null || roles.length == 0) {
             roles = GuildRole.values();
