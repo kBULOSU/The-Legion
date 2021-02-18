@@ -10,6 +10,7 @@
     <version>0.1-ALPHA</version>
     <modules>
         <module>glory-points</module>
+        <module>guilds</module>
     </modules>
 
     <properties>
