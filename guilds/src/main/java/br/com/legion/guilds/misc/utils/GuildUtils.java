@@ -94,9 +94,7 @@ public class GuildUtils {
             return out.collect(Collectors.toSet());
         }
 
-        Set<String> handles = out.map(User::getName).collect(Collectors.toSet());
-
-        return handles.stream()
+        return out.map(User::getName)
                 .map(name -> ApiProvider.Cache.Local.USERS.provide().get(name))
                 .filter(Objects::nonNull)
                 .collect(Collectors.toSet());
