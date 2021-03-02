@@ -1,17 +1,13 @@
 package br.com.legion.guilds.storage.specs;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
-import java.util.Date;
-
 import br.com.idea.api.shared.storage.repositories.specs.InsertSqlSpec;
 import br.com.idea.api.shared.storage.repositories.specs.PreparedStatementCreator;
 import br.com.legion.guilds.Guild;
 import br.com.legion.guilds.GuildsConstants;
 import lombok.RequiredArgsConstructor;
+
+import java.sql.*;
+import java.util.Date;
 
 @RequiredArgsConstructor
 public class InsertGuildSpec extends InsertSqlSpec<Guild> {
@@ -19,6 +15,8 @@ public class InsertGuildSpec extends InsertSqlSpec<Guild> {
     private final String tag;
 
     private final String name;
+
+    private final int level;
 
     private final int maxMembers;
 
@@ -34,9 +32,10 @@ public class InsertGuildSpec extends InsertSqlSpec<Guild> {
                 keyHolder.getInt("id"),
                 tag,
                 name,
+                level,
                 maxMembers,
-                new Date(System.currentTimeMillis()),
-                gloryPoints
+                gloryPoints,
+                new Date(System.currentTimeMillis())
         );
     }
 
@@ -44,7 +43,7 @@ public class InsertGuildSpec extends InsertSqlSpec<Guild> {
     public PreparedStatementCreator getPreparedStatementCreator() {
         return (Connection con) -> {
             String query = String.format(
-                    "INSERT INTO `%s` (`tag`, `name`, `max_members`, `gloryPoints`) VALUES(?, ?, ?, ?);",
+                    "INSERT INTO `%s` (`tag`, `name`, `level`, `max_members`, `gloryPoints`) VALUES(?, ?, ?, ?, ?);",
                     GuildsConstants.Databases.Mysql.Tables.GUILDS_TABLE_NAME
             );
 
@@ -52,8 +51,9 @@ public class InsertGuildSpec extends InsertSqlSpec<Guild> {
 
             statement.setString(1, tag);
             statement.setString(2, name);
-            statement.setInt(3, maxMembers);
-            statement.setDouble(4, gloryPoints);
+            statement.setInt(3, level);
+            statement.setInt(4, maxMembers);
+            statement.setDouble(5, gloryPoints);
 
             return statement;
         };

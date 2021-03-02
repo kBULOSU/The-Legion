@@ -30,30 +30,18 @@ import java.util.stream.Stream;
 @NoArgsConstructor(access = AccessLevel.PRIVATE)
 public class GuildUtils {
 
-    public static void broadcast(int guildId, String message, GuildRole... roles) {
-        broadcast(guildId, TextComponent.fromLegacyText(message), false, roles);
-    }
-
-    public static void broadcast(int guildId, BaseComponent[] components, GuildRole... roles) {
-        broadcast(guildId, components, false, roles);
+    public static void broadcast(int guildId, String message, boolean local, GuildRole... roles) {
+        broadcast(guildId, TextComponent.fromLegacyText(message), local, roles);
     }
 
     public static void broadcast(int guildId, BaseComponent[] components, boolean local, GuildRole... roles) {
-        if (local) {
-            getUsers(guildId, true, roles).stream()
-                    .map(user -> Bukkit.getPlayerExact(user.getName()))
-                    .filter(Objects::nonNull)
-                    .filter(Player::isOnline)
-                    .forEach(player -> {
-                        player.spigot().sendMessage(components);
-                    });
-        } else {
-          /*
-
-          redis pub
-
-           */
-        }
+        getUsers(guildId, local, roles).stream()
+                .map(user -> Bukkit.getPlayerExact(user.getName()))
+                .filter(Objects::nonNull)
+                .filter(Player::isOnline)
+                .forEach(player -> {
+                    player.spigot().sendMessage(components);
+                });
     }
 
     /*
@@ -103,6 +91,10 @@ public class GuildUtils {
     /*
 
      */
+
+    public static ItemBuilder getBanner(@NonNull Guild guild) {
+        return getBanner(guild, (Guild) null);
+    }
 
     public static ItemBuilder getBanner(@NonNull Guild guild, User user) {
         if (user != null) {

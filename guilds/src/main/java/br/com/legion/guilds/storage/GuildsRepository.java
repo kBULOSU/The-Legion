@@ -14,8 +14,8 @@ public class GuildsRepository extends MysqlRepository {
         query(new CreateGuildsTableSpec());
     }
 
-    public Guild create(String tag, String name, int maxMembers, double gloryPoints) {
-        return query(new InsertGuildSpec(tag, name, maxMembers, gloryPoints));
+    public Guild create(String tag, String name, int level, int maxMembers, double gloryPoints) {
+        return query(new InsertGuildSpec(tag, name, level, maxMembers, gloryPoints));
     }
 
     public boolean delete(int id) {

@@ -1,11 +1,11 @@
-package br.com.legion.guilds.storage.specs;
+package br.com.legion.guilds.relation.guild.storage.specs;
 
 import br.com.idea.api.shared.storage.repositories.specs.ExecuteSqlSpec;
 import br.com.idea.api.shared.storage.repositories.specs.PreparedStatementCallback;
 import br.com.idea.api.shared.storage.repositories.specs.PreparedStatementCreator;
 import br.com.legion.guilds.GuildsConstants;
 
-public class CreateGuildsTableSpec extends ExecuteSqlSpec<Void> {
+public class CreateGuildRelationTableSpec extends ExecuteSqlSpec<Void> {
 
     @Override
     public PreparedStatementCallback<Void> getPreparedStatementCallback() {
@@ -16,10 +16,8 @@ public class CreateGuildsTableSpec extends ExecuteSqlSpec<Void> {
     public PreparedStatementCreator getPreparedStatementCreator() {
         return connection -> {
             String query = String.format(
-                    "CREATE TABLE IF NOT EXISTS `%s` (`id` INT AUTO_INCREMENT PRIMARY KEY, " +
-                            "`tag` CHAR(3) NOT NULL, `name` VARCHAR(255) NOT NULL, " +
-                            "`level` INT NOT NULL, `max_members` INT NOT NULL, `gloryPoints` DOUBLE NOT NULL);",
-                    GuildsConstants.Databases.Mysql.Tables.GUILDS_TABLE_NAME
+                    "CREATE TABLE IF NOT EXISTS `%s` (`guild_id_min` INT NOT NULL, `guild_id_max` INT NOT NULL, `type` VARCHAR(255) NOT NULL);",
+                    GuildsConstants.Databases.Mysql.Tables.GUILDS_RELATIONS_TABLE_NAME
             );
 
             return connection.prepareStatement(query);

@@ -1,0 +1,8 @@
+#Guilds
+
+bank-limit: #pelos léveis
+  1: 1000
+  2: 2000
+  3: 3000
+
+price-to-create: 100000

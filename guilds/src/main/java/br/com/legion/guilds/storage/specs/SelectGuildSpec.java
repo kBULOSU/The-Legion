@@ -16,11 +16,12 @@ public abstract class SelectGuildSpec extends SelectSqlSpec<Guild> {
                 int id = result.getInt("id");
                 String tag = result.getString("tag").toUpperCase();
                 String name = result.getString("name");
+                int level = result.getInt("level");
                 Date createdAt = result.getTimestamp("created_at");
                 int maxMembers = result.getInt("max_members");
                 double gloryPoints = result.getDouble("gloryPoints");
 
-                Guild guild = new Guild(id, tag, name, maxMembers, createdAt, gloryPoints);
+                Guild guild = new Guild(id, tag, name, level, maxMembers, gloryPoints, createdAt);
 
                 return guild;
             }
