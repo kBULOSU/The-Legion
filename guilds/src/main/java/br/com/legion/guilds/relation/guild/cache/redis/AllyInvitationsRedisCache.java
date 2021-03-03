@@ -13,8 +13,8 @@ import java.util.stream.Collectors;
 
 public class AllyInvitationsRedisCache implements RedisCache {
 
-    private static String getKey(int factionId) {
-        return String.format("ally_invitations:%d", factionId);
+    private static String getKey(int guildId) {
+        return String.format("ally_invitations:%d", guildId);
     }
 
     public void putInvitation(int senderId, int targetId) {
@@ -30,9 +30,9 @@ public class AllyInvitationsRedisCache implements RedisCache {
         }
     }
 
-    public Set<Integer> getInvitations(int factionId) {
+    public Set<Integer> getInvitations(int guildId) {
         try (Jedis jedis = GuildsFrameworkProvider.Redis.REDIS_MAIN.provide().getResource()) {
-            Set<String> members = jedis.smembers(getKey(factionId));
+            Set<String> members = jedis.smembers(getKey(guildId));
 
             if (members == null || members.isEmpty()) {
                 return Sets.newHashSet();

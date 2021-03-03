@@ -19,22 +19,17 @@ public class BroadcastMessagePacket extends EchoPacket {
 
     protected BaseComponent[] components;
 
-    protected boolean groupStrict;
-
     protected ServerType server;
 
     @Override
     public void write(EchoBufferOutput buffer) {
         buffer.writeString(ComponentSerializer.toString(this.components));
-        buffer.writeBoolean(groupStrict);
         buffer.writeEnum(server);
     }
 
     @Override
     public void read(EchoBufferInput buffer) {
         this.components = ComponentSerializer.parse(buffer.readString());
-        this.groupStrict = buffer.readBoolean();
         this.server = buffer.readEnum(ServerType.class);
     }
-
 }

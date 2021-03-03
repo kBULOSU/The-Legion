@@ -40,9 +40,9 @@ public class AcceptSubCommand extends GuildSubCommand {
 
             Set<Integer> invites = GuildsProvider.Cache.Redis.GUILD_INVITATIONS.provide().getInvitations(user.getId());
 
-            invites.forEach(factionId -> {
+            invites.forEach(guildId -> {
                 inventory.item(new ItemStack(Material.BANNER), event -> {
-                    player.performCommand("f aceitar " + GuildsProvider.Cache.Local.GUILDS.provide().getById(factionId).getTag());
+                    player.performCommand("guilda aceitar " + GuildsProvider.Cache.Local.GUILDS.provide().getById(guildId).getTag());
                 });
             });
 

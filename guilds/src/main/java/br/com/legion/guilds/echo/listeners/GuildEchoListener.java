@@ -116,7 +116,7 @@ public class GuildEchoListener implements EchoListener {
         GuildsProvider.Cache.Local.GUILDS_RELATIONS.provide().invalidate(packet.getSenderGuildId(), packet.getTargetGuildId());
 
         if (packet.getRelation() == GuildRelation.ALLY) {
-            Message.INFO.send(targetPlayer, String.format("A aliança com a facção %s &efoi desfeita.", senderGuild.getDisplayName()));
+            Message.INFO.send(targetPlayer, String.format("A aliança com a guilda %s &efoi desfeita.", senderGuild.getDisplayName()));
         }
     }
 }

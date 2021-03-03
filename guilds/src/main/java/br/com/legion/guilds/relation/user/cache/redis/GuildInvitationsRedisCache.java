@@ -17,13 +17,13 @@ public class GuildInvitationsRedisCache implements RedisCache {
         return String.format("factions_invitations:%d", userId);
     }
 
-    public void putInvitation(int userId, int factionId) {
+    public void putInvitation(int userId, int guildId) {
         try (Jedis jedis = GuildsFrameworkProvider.Redis.REDIS_MAIN.provide().getResource()) {
             Pipeline pipeline = jedis.pipelined();
 
             String key = getKey(userId);
 
-            pipeline.sadd(key, String.valueOf(factionId));
+            pipeline.sadd(key, String.valueOf(guildId));
             pipeline.expire(key, 60 * 30);
 
             pipeline.sync();
@@ -45,9 +45,9 @@ public class GuildInvitationsRedisCache implements RedisCache {
         }
     }
 
-    public boolean hasInvite(int userId, int factionId) {
+    public boolean hasInvite(int userId, int guildId) {
         try (Jedis jedis = GuildsFrameworkProvider.Redis.REDIS_MAIN.provide().getResource()) {
-            return jedis.sismember(getKey(userId), String.valueOf(factionId));
+            return jedis.sismember(getKey(userId), String.valueOf(guildId));
         }
     }
 

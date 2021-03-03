@@ -15,9 +15,9 @@ import org.bukkit.command.CommandSender;
 
 import java.util.Set;
 
-public class FactionChatCommand extends CustomCommand {
+public class GuildChatCommand extends CustomCommand {
 
-    public FactionChatCommand() {
+    public GuildChatCommand() {
         super("c", CommandRestriction.IN_GAME, ".");
     }
 

@@ -36,8 +36,8 @@ public class GuildUtils {
         broadcast(guildId, TextComponent.fromLegacyText(message), local, roles);
     }
 
-    public static void broadcast(int factionId, BaseComponent[] components, GuildRole... roles) {
-        broadcast(factionId, components, false, roles);
+    public static void broadcast(int guildId, BaseComponent[] components, GuildRole... roles) {
+        broadcast(guildId, components, false, roles);
     }
 
     public static void broadcast(int guildId, BaseComponent[] components, boolean local, GuildRole... roles) {

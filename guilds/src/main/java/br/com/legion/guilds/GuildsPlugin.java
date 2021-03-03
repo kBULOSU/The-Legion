@@ -2,7 +2,7 @@ package br.com.legion.guilds;
 
 import br.com.idea.api.spigot.commands.CommandRegistry;
 import br.com.legion.guilds.commands.AllyChatCommand;
-import br.com.legion.guilds.commands.FactionChatCommand;
+import br.com.legion.guilds.commands.GuildChatCommand;
 import br.com.legion.guilds.commands.GuildCommand;
 import br.com.legion.guilds.echo.listeners.GuildEchoListener;
 import br.com.legion.guilds.echo.listeners.GuildUserEchoListener;
@@ -34,7 +34,7 @@ public class GuildsPlugin extends JavaPlugin {
         CommandRegistry.registerCommand(
                 new GuildCommand(),
                 new AllyChatCommand(),
-                new FactionChatCommand()
+                new GuildChatCommand()
         );
     }
 
