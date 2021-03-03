@@ -47,6 +47,6 @@ public class FactionChatCommand extends CustomCommand {
                 messageBuilder.create()
         );
 
-        GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(packet);
+        GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(packet);
     }
 }
