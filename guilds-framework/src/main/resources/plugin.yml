@@ -1,0 +1,7 @@
+name: Guilds-Framework
+author: yiatz
+version: 0.1-ALPHA
+main: br.com.legion.guilds.framework.GuildsFrameworkPlugin
+
+depend:
+  - API-Spigot

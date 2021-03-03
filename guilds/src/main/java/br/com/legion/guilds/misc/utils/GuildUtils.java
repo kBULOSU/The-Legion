@@ -6,6 +6,8 @@ import br.com.idea.api.spigot.misc.utils.BannerAlphabet;
 import br.com.idea.api.spigot.misc.utils.ItemBuilder;
 import br.com.legion.guilds.Guild;
 import br.com.legion.guilds.GuildsProvider;
+import br.com.legion.guilds.framework.GuildsFrameworkProvider;
+import br.com.legion.guilds.framework.echo.packets.SendMessagePacket;
 import br.com.legion.guilds.relation.guild.GuildRelation;
 import br.com.legion.guilds.relation.user.GuildRole;
 import br.com.legion.guilds.relation.user.GuildUserRelation;
@@ -34,14 +36,25 @@ public class GuildUtils {
         broadcast(guildId, TextComponent.fromLegacyText(message), local, roles);
     }
 
+    public static void broadcast(int factionId, BaseComponent[] components, GuildRole... roles) {
+        broadcast(factionId, components, false, roles);
+    }
+
     public static void broadcast(int guildId, BaseComponent[] components, boolean local, GuildRole... roles) {
-        getUsers(guildId, local, roles).stream()
-                .map(user -> Bukkit.getPlayerExact(user.getName()))
-                .filter(Objects::nonNull)
-                .filter(Player::isOnline)
-                .forEach(player -> {
-                    player.spigot().sendMessage(components);
-                });
+        if (local) {
+            getUsers(guildId, true, roles).stream()
+                    .map(user -> Bukkit.getPlayerExact(user.getName()))
+                    .filter(Objects::nonNull)
+                    .filter(Player::isOnline)
+                    .forEach(player -> {
+                        player.spigot().sendMessage(components);
+                    });
+        } else {
+            GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(new SendMessagePacket(
+                    getUsers(guildId).stream().mapToInt(User::getId).toArray(),
+                    components
+            ));
+        }
     }
 
     /*

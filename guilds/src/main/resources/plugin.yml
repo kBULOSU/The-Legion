@@ -1,4 +1,4 @@
 name: ${project.name}
 main: br.com.legion.guilds.GuildsPlugin
 version: 0.1-ALPHA
-depend: [API-Spigot, Glory-Points]
+depend: [API-Spigot, Glory-Points, Guilds-Framework]

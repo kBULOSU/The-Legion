@@ -5,6 +5,8 @@ import br.com.idea.api.spigot.inventory.ConfirmInventory;
 import br.com.idea.api.spigot.misc.message.Message;
 import br.com.legion.guilds.GuildsProvider;
 import br.com.legion.guilds.commands.GuildSubCommand;
+import br.com.legion.guilds.echo.packets.GuildDisbandPacket;
+import br.com.legion.guilds.framework.GuildsFrameworkProvider;
 import br.com.legion.guilds.relation.user.GuildRole;
 import br.com.legion.guilds.relation.user.GuildUserRelation;
 import org.bukkit.entity.Player;
@@ -35,6 +37,9 @@ public class DisbandSubCommand extends GuildSubCommand {
                 player.closeInventory();
                 return;
             }
+
+            GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(
+                    new GuildDisbandPacket(relation.getGuildId()));
 
             Message.SUCCESS.send(player, "Você desfez sua guilda.");
         }, event -> {

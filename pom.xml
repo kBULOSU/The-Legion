@@ -8,9 +8,11 @@
     <artifactId>The-Legion</artifactId>
     <packaging>pom</packaging>
     <version>0.1-ALPHA</version>
+
     <modules>
         <module>glory-points</module>
         <module>guilds</module>
+        <module>guilds-framework</module>
     </modules>
 
     <properties>

@@ -5,9 +5,12 @@ import br.com.idea.api.shared.contracts.Provider;
 import br.com.idea.api.shared.providers.LocalCacheProvider;
 import br.com.idea.api.shared.providers.MysqlRepositoryProvider;
 import br.com.legion.guilds.cache.local.GuildLocalCache;
+import br.com.legion.guilds.framework.providers.RedisCacheProvider;
 import br.com.legion.guilds.relation.guild.cache.local.GuildRelationsLocalCache;
+import br.com.legion.guilds.relation.guild.cache.redis.AllyInvitationsRedisCache;
 import br.com.legion.guilds.relation.guild.storage.GuildRelationsRepository;
 import br.com.legion.guilds.relation.user.cache.local.GuildUsersRelationsLocalCache;
+import br.com.legion.guilds.relation.user.cache.redis.GuildInvitationsRedisCache;
 import br.com.legion.guilds.relation.user.storage.GuildUserRelationRepository;
 import br.com.legion.guilds.storage.GuildsRepository;
 import br.com.legion.guilds.user.cache.local.GuildUserLocalCache;
@@ -28,6 +31,9 @@ public class GuildsProvider {
         PROVIDERS.add(Cache.Local.USERS);
         PROVIDERS.add(Cache.Local.USERS_RELATIONS);
         PROVIDERS.add(Cache.Local.GUILDS_RELATIONS);
+
+        PROVIDERS.add(Cache.Redis.GUILD_INVITATIONS);
+        PROVIDERS.add(Cache.Redis.ALLY_INVITATIONS);
     }
 
     public static void prepare() {
@@ -77,6 +83,17 @@ public class GuildsProvider {
 
             public static final LocalCacheProvider<GuildRelationsLocalCache> GUILDS_RELATIONS = new LocalCacheProvider<>(
                     new GuildRelationsLocalCache()
+            );
+        }
+
+        public static class Redis {
+
+            public static final RedisCacheProvider<GuildInvitationsRedisCache> GUILD_INVITATIONS = new RedisCacheProvider<>(
+                    new GuildInvitationsRedisCache()
+            );
+
+            public static final RedisCacheProvider<AllyInvitationsRedisCache> ALLY_INVITATIONS = new RedisCacheProvider<>(
+                    new AllyInvitationsRedisCache()
             );
         }
 

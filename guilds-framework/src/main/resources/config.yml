@@ -1,0 +1,6 @@
+Redis:
+  redis-host: ""
+  redis-port: ""
+  redis-auth: ""
+
+server-type: "LOBBY" #LOBBY OU MAIN

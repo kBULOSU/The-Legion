@@ -49,6 +49,13 @@
             <artifactId>glory-points</artifactId>
             <version>0.1-ALPHA</version>
         </dependency>
+
+        <dependency>
+            <groupId>br.com.legion</groupId>
+            <artifactId>guilds-framework</artifactId>
+            <version>0.1-ALPHA</version>
+        </dependency>
+
     </dependencies>
 
 </project>

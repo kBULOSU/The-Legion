@@ -10,6 +10,8 @@ import br.com.legion.guilds.Guild;
 import br.com.legion.guilds.GuildsConstants;
 import br.com.legion.guilds.GuildsProvider;
 import br.com.legion.guilds.commands.GuildSubCommand;
+import br.com.legion.guilds.echo.packets.UserJoinedGuildPacket;
+import br.com.legion.guilds.framework.GuildsFrameworkProvider;
 import br.com.legion.guilds.relation.user.GuildRole;
 import br.com.legion.guilds.relation.user.GuildUserRelation;
 import com.google.common.base.Joiner;
@@ -116,6 +118,9 @@ public class CreateSubCommand extends GuildSubCommand {
                     GuildUserRelation relation1 = new GuildUserRelation(user.getId(), guild.getId(), GuildRole.LEADER, new Date());
 
                     GuildsProvider.Repositories.USERS_RELATIONS.provide().update(relation1);
+
+                    GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(
+                            new UserJoinedGuildPacket(guild.getId(), user.getId(), UserJoinedGuildPacket.Reason.GUILD_CREATED));
 
                     Message.SUCCESS.send(player, "Sua guilda foi criada com sucesso!");
                 },

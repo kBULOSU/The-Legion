@@ -5,6 +5,8 @@ import br.com.idea.api.spigot.inventory.ConfirmInventory;
 import br.com.idea.api.spigot.misc.message.Message;
 import br.com.legion.guilds.GuildsProvider;
 import br.com.legion.guilds.commands.GuildSubCommand;
+import br.com.legion.guilds.echo.packets.UserLeftGuildPacket;
+import br.com.legion.guilds.framework.GuildsFrameworkProvider;
 import br.com.legion.guilds.relation.user.GuildRole;
 import br.com.legion.guilds.relation.user.GuildUserRelation;
 import org.bukkit.entity.Player;
@@ -42,6 +44,12 @@ public class LeaveSubCommand extends GuildSubCommand {
             GuildsProvider.Repositories.USERS_RELATIONS.provide().removeByUser(user.getId());
             GuildsProvider.Cache.Local.USERS_RELATIONS.provide().invalidateUser(user.getId());
             GuildsProvider.Cache.Local.USERS_RELATIONS.provide().invalidateClan(relation.getGuildId());
+
+            GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(new UserLeftGuildPacket(
+                    relation.getGuildId(),
+                    user.getId(),
+                    UserLeftGuildPacket.Reason.LEAVE
+            ));
 
             Message.SUCCESS.send(player, "Você saiu da guilda.");
 

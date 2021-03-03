@@ -7,8 +7,11 @@ import br.com.idea.api.spigot.misc.message.Message;
 import br.com.legion.guilds.Guild;
 import br.com.legion.guilds.GuildsProvider;
 import br.com.legion.guilds.commands.GuildSubCommand;
+import br.com.legion.guilds.misc.utils.GuildUtils;
 import br.com.legion.guilds.relation.user.GuildRole;
 import br.com.legion.guilds.relation.user.GuildUserRelation;
+import net.md_5.bungee.api.ChatColor;
+import net.md_5.bungee.api.chat.ComponentBuilder;
 import org.bukkit.entity.Player;
 
 public class TransferSubCommand extends GuildSubCommand {
@@ -67,5 +70,15 @@ public class TransferSubCommand extends GuildSubCommand {
                 guild.getTag().toUpperCase(),
                 targetUser.getName()
         ));
+
+        ComponentBuilder builder = new ComponentBuilder("")
+                .append(user.getName())
+                .append(" transferiu a liderança da guilda para ", ComponentBuilder.FormatRetention.NONE)
+                .color(ChatColor.GREEN)
+                .append(targetUser.getName())
+                .append(".", ComponentBuilder.FormatRetention.NONE)
+                .color(ChatColor.GREEN);
+
+        GuildUtils.broadcast(guild.getId(), builder.create());
     }
 }

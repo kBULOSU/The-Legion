@@ -1,5 +1,7 @@
 package br.com.legion.guilds;
 
+import org.bukkit.configuration.file.FileConfiguration;
+
 import java.util.regex.Pattern;
 
 public class GuildsConstants {
@@ -35,13 +37,15 @@ public class GuildsConstants {
 
     public static class Config {
 
-        public static final double PRICE_TO_CREATE = GuildsPlugin.getInstance().getConfig().getInt("price-to-create");
+        private static final FileConfiguration CONFIG = GuildsPlugin.getInstance().getConfig();
 
-        public static final int HOURS_TO_CREATE = GuildsPlugin.getInstance().getConfig().getInt("hours-to-create");
+        public static final double PRICE_TO_CREATE = CONFIG.getInt("price-to-create");
 
-        public static final int BANK_LIMIT_I = GuildsPlugin.getInstance().getConfig().getInt("bank-limit.1");
-        public static final int BANK_LIMIT_II = GuildsPlugin.getInstance().getConfig().getInt("bank-limit.2");
-        public static final int BANK_LIMIT_III = GuildsPlugin.getInstance().getConfig().getInt("bank-limit.3");
+        public static final int HOURS_TO_CREATE = CONFIG.getInt("hours-to-create");
+
+        public static final int BANK_LIMIT_I = CONFIG.getInt("bank-limit.1");
+        public static final int BANK_LIMIT_II = CONFIG.getInt("bank-limit.2");
+        public static final int BANK_LIMIT_III = CONFIG.getInt("bank-limit.3");
 
         public static int getBankLimitByLevel(int level) {
             switch (level) {

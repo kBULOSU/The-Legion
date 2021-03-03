@@ -6,6 +6,8 @@ import br.com.idea.api.shared.user.User;
 import br.com.idea.api.spigot.misc.message.Message;
 import br.com.legion.guilds.GuildsProvider;
 import br.com.legion.guilds.commands.GuildSubCommand;
+import br.com.legion.guilds.echo.packets.UserLeftGuildPacket;
+import br.com.legion.guilds.framework.GuildsFrameworkProvider;
 import br.com.legion.guilds.relation.user.GuildRole;
 import br.com.legion.guilds.relation.user.GuildUserRelation;
 import org.bukkit.entity.Player;
@@ -46,6 +48,12 @@ public class KickSubCommand extends GuildSubCommand {
 
         GuildsProvider.Cache.Local.USERS_RELATIONS.provide().invalidateUser(targetUser.getId());
         GuildsProvider.Cache.Local.USERS_RELATIONS.provide().invalidateClan(targetRelation.getGuildId());
+
+        GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(new UserLeftGuildPacket(
+                targetRelation.getGuildId(),
+                targetUser.getId(),
+                UserLeftGuildPacket.Reason.KICK
+        ));
 
         Message.SUCCESS.send(player, String.format("Você expulsou o jogador %s.", targetUser.getName()));
     }
