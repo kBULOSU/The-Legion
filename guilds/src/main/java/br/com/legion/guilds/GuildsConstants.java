@@ -19,6 +19,8 @@ public class GuildsConstants {
     // [A-Za-zÀ-ÖØ-öø-ÿ ]{5,20}
     public static final Pattern NAME_PATTERN = Pattern.compile(String.format("[a-zA-Z0-9 ]{%s,%s}", NAME_MIN_LENGTH, NAME_MAX_LENGTH));
 
+    public static final String MONEY_HEAD_KEY = "http://textures.minecraft.net/texture/7cc4cf8a56a01fa4794184aa11d1b603b76df16a8282dfc10e9c46060d32768a";
+
     public static class Databases {
 
         public static class Mysql {

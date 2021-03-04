@@ -7,6 +7,8 @@ import br.com.idea.api.spigot.misc.message.Message;
 import br.com.legion.guilds.Guild;
 import br.com.legion.guilds.GuildsProvider;
 import br.com.legion.guilds.commands.GuildSubCommand;
+import br.com.legion.guilds.framework.GuildsFrameworkProvider;
+import br.com.legion.guilds.framework.server.ServerType;
 import br.com.legion.guilds.misc.utils.GuildUtils;
 import br.com.legion.guilds.relation.user.GuildRole;
 import br.com.legion.guilds.relation.user.GuildUserRelation;
@@ -24,6 +26,11 @@ public class TransferSubCommand extends GuildSubCommand {
 
     @Override
     public void onCommand(Player player, User user, GuildUserRelation relation, String[] args) {
+        if (GuildsFrameworkProvider.getServerType() == ServerType.LOBBY) {
+            Message.ERROR.send(player, "Este comando só pode ser usado no servidor principal.");
+            return;
+        }
+
         String targetNick = args[0];
 
         User targetUser = ApiProvider.Cache.Local.USERS.provide().get(targetNick);

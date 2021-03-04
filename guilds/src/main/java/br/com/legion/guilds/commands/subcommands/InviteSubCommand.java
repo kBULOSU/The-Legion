@@ -9,6 +9,7 @@ import br.com.legion.guilds.GuildsProvider;
 import br.com.legion.guilds.commands.GuildSubCommand;
 import br.com.legion.guilds.echo.packets.UserInvitedGuildPacket;
 import br.com.legion.guilds.framework.GuildsFrameworkProvider;
+import br.com.legion.guilds.framework.server.ServerType;
 import br.com.legion.guilds.misc.utils.GuildUtils;
 import br.com.legion.guilds.relation.user.GuildRole;
 import br.com.legion.guilds.relation.user.GuildUserRelation;
@@ -26,7 +27,6 @@ public class InviteSubCommand extends GuildSubCommand {
 
     @Override
     public void onCommand(Player player, User user, GuildUserRelation relation, String[] args) {
-
         Set<User> allUsers = GuildUtils.getUsers(relation.getGuildId());
         Guild guild = GuildsProvider.Cache.Local.GUILDS.provide().getById(relation.getGuildId());
 

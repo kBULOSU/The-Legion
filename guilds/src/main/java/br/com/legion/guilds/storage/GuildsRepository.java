@@ -33,4 +33,12 @@ public class GuildsRepository extends MysqlRepository {
     public Guild fetchByName(String name) {
         return query(new SelectGuildByNameSpec(name));
     }
+
+    public void updateLevel(Integer id, int level) {
+        query(new UpdateGuildLevelByIdSpec(id, level));
+    }
+
+    public void updateBank(Integer id, double gloryPoints) {
+        query(new UpdateGuildBankByIdSpec(id, gloryPoints));
+    }
 }

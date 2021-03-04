@@ -25,6 +25,8 @@ public class GuildsFrameworkPlugin extends JavaPlugin {
     public void onEnable() {
         super.onEnable();
 
+        saveDefaultConfig();
+
         instance = this;
 
         InetSocketAddress address = new InetSocketAddress(

@@ -25,14 +25,7 @@ public class RelationSubCommand extends GuildSubCommand {
         Guild guild;
 
         if (args.length < 1) {
-
-            if (relation == null) {
-                player.sendMessage(getUsage(player, "relacao"));
-                return;
-            }
-
             guild = GuildsProvider.Cache.Local.GUILDS.provide().getById(relation.getGuildId());
-
         } else {
             guild = GuildsProvider.Cache.Local.GUILDS.provide().getByTag(args[0]);
 

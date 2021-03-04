@@ -15,12 +15,10 @@ public class LeaveSubCommand extends GuildSubCommand {
 
     public LeaveSubCommand() {
         super("sair", GuildRole.MEMBER);
-
     }
 
     @Override
     public void onCommand(Player player, User user, GuildUserRelation runtimeRelation, String[] args) {
-
         if (runtimeRelation.getRole() == GuildRole.LEADER) {
             Message.ERROR.send(player, "Você precisa transferir ou terminar sua guilda antes de sair.");
             return;

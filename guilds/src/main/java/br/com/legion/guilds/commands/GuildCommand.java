@@ -3,11 +3,14 @@ package br.com.legion.guilds.commands;
 import br.com.idea.api.shared.commands.CommandRestriction;
 import br.com.idea.api.spigot.commands.CustomCommand;
 import br.com.legion.guilds.commands.subcommands.*;
+import br.com.legion.guilds.commands.subcommands.banksubcommand.BankSubCommand;
+import br.com.legion.guilds.commands.subcommands.menusubcommand.MenuSubCommand;
+import br.com.legion.guilds.commands.subcommands.relationsubcommand.RelationSubCommand;
 
 public class GuildCommand extends CustomCommand {
 
     public GuildCommand() {
-        super("guild", CommandRestriction.IN_GAME, "guilda");
+        super("guilda", CommandRestriction.IN_GAME, "guild");
 
         //sub comandos
         registerSubCommand(new AcceptSubCommand(), "Aceite um convite de guilda.");
@@ -23,6 +26,8 @@ public class GuildCommand extends CustomCommand {
         registerSubCommand(new MembersSubCommand(), "Liste os membros de uma guilda.");
         registerSubCommand(new PromoteSubCommand(), "Promova um jogador da guilda.");
         registerSubCommand(new TransferSubCommand(), "Transfira a liderança da guilda.");
-
+        registerSubCommand(new RelationSubCommand(), "Gerencie a relação com uma guilda.");
+        registerSubCommand(new BankSubCommand(), "Gerencie o banco da guilda.");
+        registerSubCommand(new MenuSubCommand(), "Abra o menu da guilda.");
     }
 }
