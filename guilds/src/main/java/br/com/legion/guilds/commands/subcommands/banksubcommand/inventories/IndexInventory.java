@@ -17,8 +17,8 @@ import org.bukkit.entity.Player;
 
 public class IndexInventory extends CustomInventory {
 
-    private static final String LIME_PLUS_HEAD_KEY = "http://textures.minecraft.net/texture/b056bc1244fcff99344f12aba42ac23fee6ef6e3351d27d273c1572531f";
-    private static final String RED_MINUS_HEAD_KEY = "http://textures.minecraft.net/texture/4e4b8b8d2362c864e062301487d94d3272a6b570afbf80c2c5b148c954579d46";
+    private static final String LIME_PLUS_HEAD_KEY = "b056bc1244fcff99344f12aba42ac23fee6ef6e3351d27d273c1572531f";
+    private static final String RED_MINUS_HEAD_KEY = "4e4b8b8d2362c864e062301487d94d3272a6b570afbf80c2c5b148c954579d46";
 
     public IndexInventory(Guild guild) {
         super(3 * 9, String.format("[%s] - Banco", guild.getTag()));
