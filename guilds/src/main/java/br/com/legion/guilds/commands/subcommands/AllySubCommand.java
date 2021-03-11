@@ -51,7 +51,7 @@ public class AllySubCommand extends GuildSubCommand {
             GuildsProvider.Repositories.GUILDS_RELATIONS.provide().delete(relation.getGuildId(), target.getId());
             GuildsProvider.Cache.Local.GUILDS_RELATIONS.provide().invalidate(relation.getGuildId(), target.getId());
 
-            GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(
+            GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(
                     new GuildRelationDeletedPacket(relation.getGuildId(), target.getId(), GuildRelation.ALLY));
 
             Message.INFO.send(player, String.format("Sua guilda desfez a aliança com a guilda %s&e.", target.getDisplayName()));
@@ -75,7 +75,7 @@ public class AllySubCommand extends GuildSubCommand {
             GuildsProvider.Repositories.GUILDS_RELATIONS.provide().insert(relation.getGuildId(), target.getId(), GuildRelation.ALLY);
             GuildsProvider.Cache.Local.GUILDS_RELATIONS.provide().invalidate(relation.getGuildId(), target.getId());
 
-            GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(
+            GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(
                     new GuildRelationCreatedPacket(relation.getGuildId(), target.getId(), GuildRelation.ALLY));
 
             Message.SUCCESS.send(player, String.format("Sua guilda começou uma aliança com a guilda %s&a.", target.getDisplayName()));
@@ -89,7 +89,7 @@ public class AllySubCommand extends GuildSubCommand {
         }
 
         GuildsProvider.Cache.Redis.ALLY_INVITATIONS.provide().putInvitation(relation.getGuildId(), target.getId());
-        GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(
+        GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(
                 new GuildRelationInvitePacket(relation.getGuildId(), target.getId(), GuildRelation.ALLY));
 
         Message.SUCCESS.send(player, String.format("Você convidou a guilda %s &apara uma aliança.", target.getDisplayName()));

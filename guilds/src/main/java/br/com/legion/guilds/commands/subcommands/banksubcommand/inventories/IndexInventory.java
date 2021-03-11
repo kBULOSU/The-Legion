@@ -108,7 +108,6 @@ public class IndexInventory extends CustomInventory {
 
                 GuildsProvider.Repositories.GUILDS.provide().updateBank(guild.getId(), guild.getGloryPoints());
                 GuildsProvider.Cache.Local.GUILDS.provide().invalidateId(guild.getId());
-                GuildsProvider.Cache.Local.GUILDS.provide().invalidateTag(guild.getTag());
 
                 ComponentBuilder builder = new ComponentBuilder("")
                         .color(ChatColor.GREEN)

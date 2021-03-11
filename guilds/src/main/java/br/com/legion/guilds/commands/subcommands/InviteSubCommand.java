@@ -69,7 +69,7 @@ public class InviteSubCommand extends GuildSubCommand {
         GuildsProvider.Cache.Redis.GUILD_INVITATIONS.provide().putInvitation(targetUser.getId(), relation.getGuildId());
 
         GuildsFrameworkProvider.Redis.ECHO.provide()
-                .publishToCurrentServer(new UserInvitedGuildPacket(relation.getGuildId(), targetUser.getId(), user.getId()));
+                .publishToAll(new UserInvitedGuildPacket(relation.getGuildId(), targetUser.getId(), user.getId()));
 
         Message.SUCCESS.send(player, "Você convidou o jogador " + targetNick + " para sua guilda.");
     }

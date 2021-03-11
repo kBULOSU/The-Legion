@@ -38,7 +38,7 @@ public class DisbandSubCommand extends GuildSubCommand {
                 return;
             }
 
-            GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(
+            GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(
                     new GuildDisbandPacket(relation.getGuildId()));
 
             Message.SUCCESS.send(player, "Você desfez sua guilda.");

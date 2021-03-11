@@ -43,7 +43,7 @@ public class LeaveSubCommand extends GuildSubCommand {
             GuildsProvider.Cache.Local.USERS_RELATIONS.provide().invalidateUser(user.getId());
             GuildsProvider.Cache.Local.USERS_RELATIONS.provide().invalidateClan(relation.getGuildId());
 
-            GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(new UserLeftGuildPacket(
+            GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(new UserLeftGuildPacket(
                     relation.getGuildId(),
                     user.getId(),
                     UserLeftGuildPacket.Reason.LEAVE

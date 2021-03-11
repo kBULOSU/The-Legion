@@ -24,7 +24,6 @@ import java.util.function.Consumer;
 public class Echo {
 
     public static final String CHANNEL_BASE_NAME = "minecraft/";
-    public static final String SERVER_CHANNEL_NAME = "minecraft/server/%s"; // minecraft/server/<server>
 
     private final RedisProvider redisProvider;
 
@@ -60,31 +59,19 @@ public class Echo {
      */
 
     public <T extends EchoPacket> void publishToAll(T packet) {
-        _publish(packet, createHeader(null), CHANNEL_BASE_NAME);
+        _publish(packet, createHeader(null));
     }
 
     /*
 
      */
 
-    public <T extends EchoPacket> void publishToCurrentServer(T packet) {
-        publishToServer(packet, GuildsFrameworkProvider.getServerType());
-    }
-
-    public <T extends EchoPacket> void publishToServer(T packet, ServerType server) {
-        _publish(packet, createHeader(null), String.format(SERVER_CHANNEL_NAME, server.getId()));
-    }
-
-    public <T extends EchoPacket> void publish(T packet, UUID responseUUID, String channel) {
-        _publish(packet, createHeader(responseUUID), String.format(SERVER_CHANNEL_NAME, channel));
-    }
-
-    private <T extends EchoPacket> void _publish(T packet, EchoPacketHeader header, String channel) {
+    private <T extends EchoPacket> void _publish(T packet, EchoPacketHeader header) {
         Class clazz = packet.getClass();
         boolean debug = clazz.getAnnotation(DebugPacket.class) != null;
 
         if (debug) {
-            Printer.INFO.print(String.format("Channel - %s - %s", clazz.getSimpleName(), channel));
+            Printer.INFO.print(String.format("Channel - %s - %s", clazz.getSimpleName(), Echo.CHANNEL_BASE_NAME));
         }
 
         EchoBufferOutput buffer = new EchoBufferOutput();
@@ -97,12 +84,12 @@ public class Echo {
         packet.setHeader(header);
 
         for (EchoSubscriber subscriber : subscribers) {
-            if (subscriber.channels.contains(channel)) {
+            if (subscriber.channels.contains(Echo.CHANNEL_BASE_NAME)) {
                 if (debug) {
                     Printer.INFO.print(String.format("Local executor - %s", clazz.getSimpleName()));
                 }
 
-                subscriber.callPacket(channel, packet);
+                subscriber.callPacket(Echo.CHANNEL_BASE_NAME, packet);
             }
         }
 
@@ -111,7 +98,7 @@ public class Echo {
                 Printer.INFO.print(String.format("Publish - %s", clazz.getSimpleName()));
             }
 
-            jedis.publish(channel.getBytes(), buffer.toByteArray());
+            jedis.publish(Echo.CHANNEL_BASE_NAME.getBytes(), buffer.toByteArray());
         }
     }
 
@@ -121,12 +108,6 @@ public class Echo {
 
     public EchoSubscriber subscribe(@NonNull BiConsumer<EchoPacket, Runnable> dispatcher) {
         List<String> channels = Lists.newArrayList(CHANNEL_BASE_NAME);
-
-        ServerType source = GuildsFrameworkProvider.getServerType();
-
-        if (source != null) {
-            channels.add(String.format(SERVER_CHANNEL_NAME, source.getId()));
-        }
 
         return subscribe(dispatcher, channels);
     }

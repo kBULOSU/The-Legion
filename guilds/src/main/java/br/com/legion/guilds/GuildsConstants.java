@@ -49,6 +49,11 @@ public class GuildsConstants {
         public static final int BANK_LIMIT_II = CONFIG.getInt("bank-limit.2");
         public static final int BANK_LIMIT_III = CONFIG.getInt("bank-limit.3");
 
+        public static final int MAINTENANCE_I = CONFIG.getInt("maintenance.1");
+        public static final int MAINTENANCE_II = CONFIG.getInt("maintenance.2");
+        public static final int MAINTENANCE_III = CONFIG.getInt("maintenance.3");
+        public static final int MAINTENANCE_COOLDOWN = CONFIG.getInt("maintenance.cooldown");
+
         public static int getBankLimitByLevel(int level) {
             switch (level) {
                 case 1:
@@ -57,6 +62,19 @@ public class GuildsConstants {
                     return BANK_LIMIT_II;
                 case 3:
                     return BANK_LIMIT_III;
+                default:
+                    return 0;
+            }
+        }
+
+        public static int getMaintenanceTaxByLevel(int level) {
+            switch (level) {
+                case 1:
+                    return MAINTENANCE_I;
+                case 2:
+                    return MAINTENANCE_II;
+                case 3:
+                    return MAINTENANCE_III;
                 default:
                     return 0;
             }

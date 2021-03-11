@@ -1,6 +1,7 @@
 package br.com.legion.guilds;
 
 import br.com.idea.api.shared.messages.MessageUtils;
+import br.com.legion.guilds.maintenance.GuildMaintenanceRunnable;
 import lombok.*;
 
 import java.util.Date;
@@ -28,6 +29,9 @@ public class Guild {
 
     @Setter
     private double gloryPoints;
+
+    @Setter
+    private long lastMaintenance;
 
     @Setter
     private double bankLimit;
@@ -60,5 +64,20 @@ public class Guild {
         return MessageUtils.translateColorCodes(String.format(
                 "[%s] %s", tag.toUpperCase(), name
         ));
+    }
+
+    public void doMaintenance() {
+        if (needMaintenance()) {
+            new GuildMaintenanceRunnable(this).run();
+        }
+    }
+
+    public boolean needMaintenance() {
+        long lastMaintenanceDif = System.currentTimeMillis() - this.getLastMaintenance();
+        long lastMaintenanceDifSeconds = lastMaintenanceDif / 1000;
+        long lastMaintenanceDifMinutes = lastMaintenanceDifSeconds / 60;
+        long lastMaintenanceDifHours = lastMaintenanceDifMinutes / 60;
+
+        return lastMaintenanceDifHours >= GuildsConstants.Config.MAINTENANCE_COOLDOWN;
     }
 }

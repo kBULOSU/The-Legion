@@ -77,7 +77,7 @@ public class PromoteSubCommand extends GuildSubCommand {
         GuildsProvider.Repositories.USERS_RELATIONS.provide().update(targetRelation);
         GuildsProvider.Cache.Local.USERS_RELATIONS.provide().invalidateUser(targetUser.getId());
 
-        GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(
+        GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(
                 new UserRankUpdatedPacket(targetUser.getId(), user.getId(), oldRank, newRank));
 
         Message.SUCCESS.send(player, String.format(

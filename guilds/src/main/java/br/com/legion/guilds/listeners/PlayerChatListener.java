@@ -4,6 +4,7 @@ import com.google.common.collect.Maps;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.event.player.PlayerQuitEvent;
 
 import java.util.Map;
 import java.util.function.Consumer;
@@ -23,5 +24,10 @@ public class PlayerChatListener implements Listener {
         if (remove != null) {
             remove.accept(event);
         }
+    }
+
+    @EventHandler
+    public void on(PlayerQuitEvent event) {
+        CONSUMERS.remove(event.getPlayer().getName());
     }
 }

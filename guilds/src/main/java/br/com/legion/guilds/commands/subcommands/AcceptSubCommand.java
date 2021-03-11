@@ -87,7 +87,7 @@ public class AcceptSubCommand extends GuildSubCommand {
         GuildsProvider.Cache.Redis.GUILD_INVITATIONS.provide().clearInvitations(user.getId());
 
         GuildsFrameworkProvider.Redis.ECHO.provide()
-                .publishToCurrentServer(new UserJoinedGuildPacket(guild.getId(), user.getId(), UserJoinedGuildPacket.Reason.INVITATION));
+                .publishToAll(new UserJoinedGuildPacket(guild.getId(), user.getId(), UserJoinedGuildPacket.Reason.INVITATION));
 
         Message.SUCCESS.send(player, String.format("Você aceitou o convite da guilda [%s] %s.", guild.getTag(), guild.getName()));
     }

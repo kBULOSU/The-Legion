@@ -119,7 +119,7 @@ public class CreateSubCommand extends GuildSubCommand {
 
                     GuildsProvider.Repositories.USERS_RELATIONS.provide().update(relation1);
 
-                    GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(
+                    GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(
                             new UserJoinedGuildPacket(guild.getId(), user.getId(), UserJoinedGuildPacket.Reason.GUILD_CREATED));
 
                     Message.SUCCESS.send(player, "Sua guilda foi criada com sucesso!");

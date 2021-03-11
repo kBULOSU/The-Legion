@@ -54,7 +54,7 @@ public class KickSubCommand extends GuildSubCommand {
         GuildsProvider.Cache.Local.USERS_RELATIONS.provide().invalidateUser(targetUser.getId());
         GuildsProvider.Cache.Local.USERS_RELATIONS.provide().invalidateClan(targetRelation.getGuildId());
 
-        GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(new UserLeftGuildPacket(
+        GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(new UserLeftGuildPacket(
                 targetRelation.getGuildId(),
                 targetUser.getId(),
                 UserLeftGuildPacket.Reason.KICK
