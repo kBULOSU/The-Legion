@@ -31,7 +31,7 @@ public class EchoSubscriber extends BinaryJedisPubSub {
             .throwSubscriberException(true)
             .build();
 
-    protected void callPacket(String channel, EchoPacket packet) {
+    protected void callPacket(EchoPacket packet) {
         Class clazz = packet.getClass();
         boolean debug = clazz.getAnnotation(DebugPacket.class) != null;
 
@@ -80,13 +80,11 @@ public class EchoSubscriber extends BinaryJedisPubSub {
                         if (response != null) {
                             echo.publish(
                                     response,
-                                    responseUUID,
-                                    header.getSenderAppId()
+                                    responseUUID
                             );
                         } else {
                             Class responseType = respondable.getClass().getMethod("getResponse").getReturnType();
-                            echo.publish((Response) responseType.newInstance(), responseUUID,
-                                    header.getSenderAppId());
+                            echo.publish((Response) responseType.newInstance(), responseUUID);
                         }
                     } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException ex) {
                         ex.printStackTrace();
@@ -151,7 +149,7 @@ public class EchoSubscriber extends BinaryJedisPubSub {
                         Printer.INFO.print("Aceitando - " + clazz.getSimpleName());
                     }
 
-                    callPacket(new String(channel), packet);
+                    callPacket(packet);
                 }
             } catch (NoSuchMethodException | SecurityException | InstantiationException | IllegalAccessException | IllegalArgumentException | InvocationTargetException ex) {
                 ex.printStackTrace();

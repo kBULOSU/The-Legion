@@ -72,6 +72,12 @@ public class Guild {
         }
     }
 
+    public void upgradeLevel() {
+        this.maxMembers = GuildsConstants.Config.getMaxMembersByLevel(this.level);
+        this.bankLimit = GuildsConstants.Config.getBankLimitByLevel(this.level);
+        this.level++;
+    }
+
     public boolean needMaintenance() {
         long lastMaintenanceDif = System.currentTimeMillis() - this.getLastMaintenance();
         long lastMaintenanceDifSeconds = lastMaintenanceDif / 1000;

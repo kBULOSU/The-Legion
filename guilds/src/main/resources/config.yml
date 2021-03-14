@@ -9,6 +9,15 @@ maintenance:
   1: 1000
   2: 2000
   3: 3000
-  cooldown: 3
+  cooldown: 3 #horas
+
+price-to-update:
+  1-2: 1500
+  2-3: 2900
+
+max-members:
+  1: 10
+  2: 20
+  3: 30
 
 price-to-create: 100000

@@ -62,6 +62,10 @@ public class Echo {
         _publish(packet, createHeader(null));
     }
 
+    public <T extends EchoPacket> void publish(T packet, UUID responseUUID) {
+        _publish(packet, createHeader(responseUUID));
+    }
+
     /*
 
      */
@@ -89,7 +93,7 @@ public class Echo {
                     Printer.INFO.print(String.format("Local executor - %s", clazz.getSimpleName()));
                 }
 
-                subscriber.callPacket(Echo.CHANNEL_BASE_NAME, packet);
+                subscriber.callPacket(packet);
             }
         }
 

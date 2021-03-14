@@ -41,7 +41,7 @@ public class GuildsConstants {
 
         private static final FileConfiguration CONFIG = GuildsPlugin.getInstance().getConfig();
 
-        public static final double PRICE_TO_CREATE = CONFIG.getInt("price-to-create");
+        public static final double PRICE_TO_CREATE = CONFIG.getDouble("price-to-create");
 
         public static final int HOURS_TO_CREATE = CONFIG.getInt("hours-to-create");
 
@@ -53,6 +53,13 @@ public class GuildsConstants {
         public static final int MAINTENANCE_II = CONFIG.getInt("maintenance.2");
         public static final int MAINTENANCE_III = CONFIG.getInt("maintenance.3");
         public static final int MAINTENANCE_COOLDOWN = CONFIG.getInt("maintenance.cooldown");
+
+        public static final double LEVEL_UPGRADE_PRICE_II = CONFIG.getDouble("price-to-upgrade.1-2");
+        public static final double LEVEL_UPGRADE_PRICE_III = CONFIG.getDouble("price-to-upgrade.2-3");
+
+        public static final int MAX_MEMBERS_I = CONFIG.getInt("max-members.1");
+        public static final int MAX_MEMBERS_II = CONFIG.getInt("max-members.2");
+        public static final int MAX_MEMBERS_III = CONFIG.getInt("max-members.3");
 
         public static int getBankLimitByLevel(int level) {
             switch (level) {
@@ -77,6 +84,19 @@ public class GuildsConstants {
                     return MAINTENANCE_III;
                 default:
                     return 0;
+            }
+        }
+
+        public static int getMaxMembersByLevel(int level) {
+            switch (level) {
+                case 1:
+                    return MAX_MEMBERS_I;
+                case 2:
+                    return MAX_MEMBERS_II;
+                case 3:
+                    return MAX_MEMBERS_III;
+                default:
+                    return 5;
             }
         }
     }

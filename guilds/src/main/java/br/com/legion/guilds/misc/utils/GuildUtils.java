@@ -50,7 +50,7 @@ public class GuildUtils {
                         player.spigot().sendMessage(components);
                     });
         } else {
-            GuildsFrameworkProvider.Redis.ECHO.provide().publishToCurrentServer(new SendMessagePacket(
+            GuildsFrameworkProvider.Redis.ECHO.provide().publishToAll(new SendMessagePacket(
                     getUsers(guildId).stream().mapToInt(User::getId).toArray(),
                     components
             ));
