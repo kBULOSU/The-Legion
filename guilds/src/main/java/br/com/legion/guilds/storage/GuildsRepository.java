@@ -41,4 +41,8 @@ public class GuildsRepository extends MysqlRepository {
     public void updateBank(Integer id, double gloryPoints) {
         query(new UpdateGuildBankByIdSpec(id, gloryPoints));
     }
+
+    public void updateLastMaintenance(Integer id, long lastMaintenance) {
+        query(new UpdateGuildLastMaintenanceSpec(id, lastMaintenance));
+    }
 }

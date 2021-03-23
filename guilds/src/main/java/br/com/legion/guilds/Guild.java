@@ -79,11 +79,9 @@ public class Guild {
     }
 
     public boolean needMaintenance() {
-        long lastMaintenanceDif = System.currentTimeMillis() - this.getLastMaintenance();
-        long lastMaintenanceDifSeconds = lastMaintenanceDif / 1000;
-        long lastMaintenanceDifMinutes = lastMaintenanceDifSeconds / 60;
-        long lastMaintenanceDifHours = lastMaintenanceDifMinutes / 60;
+        long lastMaintenanceDiff = System.currentTimeMillis() - this.getLastMaintenance();
+        long lastMaintenanceDiffInDays = (lastMaintenanceDiff / (1000L * 60 * 60 * 24 * 365));
 
-        return lastMaintenanceDifHours >= GuildsConstants.Config.MAINTENANCE_COOLDOWN;
+        return lastMaintenanceDiffInDays >= GuildsConstants.Config.MAINTENANCE_COOLDOWN;
     }
 }

@@ -9,7 +9,7 @@ maintenance:
   1: 1000
   2: 2000
   3: 3000
-  cooldown: 3 #horas
+  cooldown: 5 #dias
 
 price-to-update:
   1-2: 1500

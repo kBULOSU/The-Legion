@@ -18,7 +18,7 @@ public class CreateGuildsTableSpec extends ExecuteSqlSpec<Void> {
             String query = String.format(
                     "CREATE TABLE IF NOT EXISTS `%s` (`id` INT AUTO_INCREMENT PRIMARY KEY, " +
                             "`tag` CHAR(3) NOT NULL, `name` VARCHAR(255) NOT NULL, " +
-                            "`level` INT NOT NULL, `max_members` INT NOT NULL, `gloryPoints` DOUBLE NOT NULL);",
+                            "`level` INT NOT NULL, `max_members` INT NOT NULL, `gloryPoints` DOUBLE NOT NULL, `lastMaintenance` TIMESTAMP NOT NULL);",
                     GuildsConstants.Databases.Mysql.Tables.GUILDS_TABLE_NAME
             );
 

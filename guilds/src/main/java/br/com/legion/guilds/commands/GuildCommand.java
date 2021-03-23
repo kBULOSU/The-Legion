@@ -4,6 +4,7 @@ import br.com.idea.api.shared.commands.CommandRestriction;
 import br.com.idea.api.spigot.commands.CustomCommand;
 import br.com.legion.guilds.commands.subcommands.*;
 import br.com.legion.guilds.commands.subcommands.banksubcommand.BankSubCommand;
+import br.com.legion.guilds.commands.subcommands.levelsubcommand.LevelSubCommand;
 import br.com.legion.guilds.commands.subcommands.menusubcommand.MenuSubCommand;
 import br.com.legion.guilds.commands.subcommands.relationsubcommand.RelationSubCommand;
 
@@ -29,5 +30,6 @@ public class GuildCommand extends CustomCommand {
         registerSubCommand(new RelationSubCommand(), "Gerencie a relação com uma guilda.");
         registerSubCommand(new BankSubCommand(), "Gerencie o banco da guilda.");
         registerSubCommand(new MenuSubCommand(), "Abra o menu da guilda.");
+        registerSubCommand(new LevelSubCommand(), "Abra o menu de level.");
     }
 }
