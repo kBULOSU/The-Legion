@@ -67,9 +67,7 @@ public class Guild {
     }
 
     public void doMaintenance() {
-        if (needMaintenance()) {
-            new GuildMaintenanceRunnable(this).run();
-        }
+        new GuildMaintenanceRunnable(this).run();
     }
 
     public void upgradeLevel() {

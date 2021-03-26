@@ -115,7 +115,6 @@ public class GuildMaintenanceRunnable implements Runnable {
             int diff = byGuild.size() - guild.getMaxMembers();
 
             Date date = new Date(System.currentTimeMillis());
-
             AtomicInteger count = new AtomicInteger();
 
             byGuild.stream()
@@ -124,7 +123,6 @@ public class GuildMaintenanceRunnable implements Runnable {
                     .filter(relation -> {
                         long diffInTime = date.getTime() - relation.getSince().getTime();
                         long diffInDays = (diffInTime / (1000L * 60 * 60 * 24 * 365));
-
                         return diffInDays <= GuildsConstants.Config.MAINTENANCE_COOLDOWN;
                     })
                     .forEach(relation -> {

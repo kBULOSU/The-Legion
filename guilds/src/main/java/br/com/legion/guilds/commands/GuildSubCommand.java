@@ -38,14 +38,14 @@ public abstract class GuildSubCommand extends CustomCommand {
                 return;
             }
 
+            Guild guild = GuildsProvider.Cache.Local.GUILDS.provide().getById(relation.getGuildId());
+            if (guild != null && guild.needMaintenance()) {
+                guild.doMaintenance();
+            }
+
             if (rank.ordinal() > relation.getRole().ordinal()) {
                 Message.ERROR.send(sender, String.format("Você precisa ter o rank %s.", rank.getDisplayName()));
                 return;
-            }
-
-            Guild guild = GuildsProvider.Cache.Local.GUILDS.provide().getById(relation.getGuildId());
-            if (guild != null) {
-                guild.doMaintenance();
             }
         }
 

@@ -13,6 +13,7 @@
         <module>glory-points</module>
         <module>guilds</module>
         <module>guilds-framework</module>
+        <module>guilds-missions</module>
     </modules>
 
     <properties>

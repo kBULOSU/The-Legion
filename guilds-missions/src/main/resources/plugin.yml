@@ -1,0 +1,9 @@
+name: L-Missions
+author: yiatzz
+version: 0.1-ALPHA
+main: br.com.legion.missions.MissionsPlugin
+
+depend:
+  - API-Spigot
+  - L-GloryPoints
+  - L-Guilds

@@ -9,6 +9,7 @@
         <outputRelativeToContentRoot value="true" />
         <module name="guilds-framework" />
         <module name="guilds" />
+        <module name="guilds-missions" />
         <module name="glory-points" />
       </profile>
     </annotationProcessing>

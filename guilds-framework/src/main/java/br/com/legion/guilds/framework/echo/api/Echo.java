@@ -122,7 +122,7 @@ public class Echo {
 
         new Thread(() -> {
             try (Jedis jedis = redisProvider.provide().getResource()) {
-                jedis.subscribe(echoSubscriber, SafeEncoder.encodeMany(channels.stream().toArray(String[]::new)));
+                jedis.subscribe(echoSubscriber, SafeEncoder.encodeMany(channels.toArray(new String[0])));
             }
         }, "Echo Subscriber Thread").start();
 

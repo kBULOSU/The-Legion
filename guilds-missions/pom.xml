@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>The-Legion</artifactId>
+        <groupId>br.com.legion</groupId>
+        <version>0.1-ALPHA</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <artifactId>guilds-missions</artifactId>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>br.com.legion.glory.points</groupId>
+            <artifactId>glory-points</artifactId>
+            <version>0.1-ALPHA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>br.com.legion</groupId>
+            <artifactId>guilds-framework</artifactId>
+            <version>0.1-ALPHA</version>
+        </dependency>
+
+        <dependency>
+            <groupId>br.com.legion.guilds</groupId>
+            <artifactId>guilds</artifactId>
+            <version>0.1-ALPHA</version>
+        </dependency>
+    </dependencies>
+
+</project>
