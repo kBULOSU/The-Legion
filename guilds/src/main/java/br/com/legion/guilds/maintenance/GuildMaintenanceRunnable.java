@@ -123,7 +123,7 @@ public class GuildMaintenanceRunnable implements Runnable {
                     .filter(relation -> {
                         long diffInTime = date.getTime() - relation.getSince().getTime();
                         long diffInDays = (diffInTime / (1000L * 60 * 60 * 24 * 365));
-                        return diffInDays <= GuildsConstants.Config.MAINTENANCE_COOLDOWN;
+                        return diffInDays <= GuildsConstants.Config.DAYS_TO_KICK;
                     })
                     .forEach(relation -> {
                         User user = ApiProvider.Cache.Local.USERS.provide().get(relation.getUserId());

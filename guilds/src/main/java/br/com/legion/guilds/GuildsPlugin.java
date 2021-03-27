@@ -7,6 +7,7 @@ import br.com.legion.guilds.commands.GuildCommand;
 import br.com.legion.guilds.echo.listeners.GuildEchoListener;
 import br.com.legion.guilds.echo.listeners.GuildUserEchoListener;
 import br.com.legion.guilds.framework.GuildsFrameworkProvider;
+import br.com.legion.guilds.framework.echo.api.Echo;
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -28,14 +29,15 @@ public class GuildsPlugin extends JavaPlugin {
 
         GuildsProvider.prepare();
 
-        GuildsFrameworkProvider.Redis.ECHO.provide().registerListener(new GuildEchoListener());
-        GuildsFrameworkProvider.Redis.ECHO.provide().registerListener(new GuildUserEchoListener());
-
         CommandRegistry.registerCommand(
                 new GuildCommand(),
                 new AllyChatCommand(),
                 new GuildChatCommand()
         );
+
+        Echo echo = GuildsFrameworkProvider.Redis.ECHO.provide();
+        echo.registerListener(new GuildEchoListener());
+        echo.registerListener(new GuildUserEchoListener());
     }
 
     @Override

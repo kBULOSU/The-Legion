@@ -54,6 +54,8 @@ public class GuildsConstants {
         public static final int MAINTENANCE_III = CONFIG.getInt("maintenance.3");
         public static final int MAINTENANCE_COOLDOWN = CONFIG.getInt("maintenance.cooldown");
 
+        public static final int DAYS_TO_KICK = CONFIG.getInt("maintenance.days-to-kick");
+
         public static final double LEVEL_UPGRADE_PRICE_II = CONFIG.getDouble("price-to-upgrade.1-2");
         public static final double LEVEL_UPGRADE_PRICE_III = CONFIG.getDouble("price-to-upgrade.2-3");
 

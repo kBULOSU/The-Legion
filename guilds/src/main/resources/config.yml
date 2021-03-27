@@ -10,6 +10,7 @@ maintenance:
   2: 2000
   3: 3000
   cooldown: 5 #dias
+  days-to-kick: 5 #dias para expulsar um membro caso a guilda é penalizada em redução de level e não possui membros máximo suficiente.
 
 price-to-update:
   1-2: 1500
