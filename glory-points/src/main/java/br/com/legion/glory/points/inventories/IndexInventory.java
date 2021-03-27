@@ -9,12 +9,11 @@ import br.com.idea.api.spigot.misc.utils.HeadTexture;
 import br.com.idea.api.spigot.misc.utils.ItemBuilder;
 import br.com.legion.glory.points.GloryPointsAPI;
 import br.com.legion.glory.points.GloryPointsProvider;
-import br.com.legion.glory.points.transactions.Transaction;
-import br.com.legion.glory.points.transactions.TransactionType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
-import java.util.*;
+import java.util.Map;
+import java.util.Set;
 
 public class IndexInventory extends CustomInventory {
 
@@ -58,40 +57,8 @@ public class IndexInventory extends CustomInventory {
                 .lore("&7Aqui você visualiza seu extrato", "&7contando com todas as transações realizadas.");
 
         setItem(14, transactions.make(), event -> {
-            PaginateInventory.PaginateInventoryBuilder inventory = PaginateInventory.builder();
-
-            List<Transaction> transactions0 = GloryPointsProvider.Repositories.TRANSACTIONS.provide().fetch(user.getId());
-            for (Transaction transaction : transactions0) {
-                inventory.item(getTransactionIcon(transaction), event0 -> {
-                    //nada
-                });
-            }
-
-            inventory.backInventory(() -> new IndexInventory(ApiProvider.Cache.Local.USERS.provide().get(user.getId())));
-
-            event.getWhoClicked().openInventory(inventory.build("Transações"));
+            event.getWhoClicked().openInventory(new TransactionsInventory(user));
         });
-    }
-
-    private ItemStack getTransactionIcon(Transaction transaction) {
-        User source = ApiProvider.Cache.Local.USERS.provide().get(transaction.getSourceId());
-
-        Calendar calendar = Calendar.getInstance();
-        calendar.setTimeInMillis(transaction.getTransactedAt().getTime());
-
-        ItemBuilder builder = new ItemBuilder(Material.PAPER)
-                .name("&eTransação")
-                .lore(
-                        "&7Origem: &f" + (transaction.getSourceId() == 0 ? "Servidor" : source.getName()),
-                        "&7Tipo: &f" + (transaction.getType() == TransactionType.SENT ? "Enviado" : "Recebida")
-                );
-
-        builder.lore("&7Efetuada em: &f" + calendar.get(Calendar.DATE) + " de "
-                + calendar.getDisplayName(Calendar.MONTH, Calendar.SHORT, Locale.getDefault())
-                + ". de " + calendar.get(Calendar.YEAR)
-                + ", às " + calendar.get(Calendar.HOUR_OF_DAY) + ":" + String.format("%02d", calendar.get(Calendar.MINUTE)) + ".");
-
-        return builder.make();
     }
 
     private ItemStack getHeadIcon(String name, int index, double amount) {

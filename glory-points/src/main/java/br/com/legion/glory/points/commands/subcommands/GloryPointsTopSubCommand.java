@@ -41,7 +41,9 @@ public class GloryPointsTopSubCommand extends CustomCommand {
 
         AtomicInteger count = new AtomicInteger(1);
 
-        this.top.forEach((name, points) -> {
+        for (Map.Entry<String, Double> entry : this.top.entrySet()) {
+            String name = entry.getKey();
+            Double points = entry.getValue();
 
             message.append("  ")
                     .append(ChatColor.WHITE)
@@ -55,8 +57,7 @@ public class GloryPointsTopSubCommand extends CustomCommand {
                     .append(NumberUtils.format(points))
                     .append(".")
                     .append("\n");
-
-        });
+        }
 
         message.append("\n");
 

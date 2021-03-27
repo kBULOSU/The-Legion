@@ -7,10 +7,7 @@ import br.com.idea.api.shared.user.User;
 import br.com.idea.api.spigot.commands.CustomCommand;
 import br.com.idea.api.spigot.misc.message.Message;
 import br.com.legion.glory.points.GloryPointsAPI;
-import br.com.legion.glory.points.commands.subcommands.GloryPointsAddSubCommand;
-import br.com.legion.glory.points.commands.subcommands.GloryPointsDefineSubCommand;
-import br.com.legion.glory.points.commands.subcommands.GloryPointsRemoveSubCommand;
-import br.com.legion.glory.points.commands.subcommands.GloryPointsTopSubCommand;
+import br.com.legion.glory.points.commands.subcommands.*;
 import br.com.legion.glory.points.inventories.IndexInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
@@ -26,6 +23,7 @@ public class GloryPointsCommand extends CustomCommand {
         registerSubCommand(new GloryPointsRemoveSubCommand());
         registerSubCommand(new GloryPointsDefineSubCommand());
         registerSubCommand(new GloryPointsTopSubCommand());
+        registerSubCommand(new GloryPointsTransactionsHistorySubCommand());
     }
 
     @Override
