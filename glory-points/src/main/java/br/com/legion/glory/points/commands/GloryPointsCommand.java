@@ -3,6 +3,7 @@ package br.com.legion.glory.points.commands;
 import br.com.idea.api.shared.commands.CommandRestriction;
 import br.com.idea.api.shared.misc.utils.DefaultMessage;
 import br.com.idea.api.shared.misc.utils.NumberUtils;
+import br.com.idea.api.shared.user.User;
 import br.com.idea.api.spigot.commands.CustomCommand;
 import br.com.idea.api.spigot.misc.message.Message;
 import br.com.legion.glory.points.GloryPointsAPI;
@@ -10,6 +11,7 @@ import br.com.legion.glory.points.commands.subcommands.GloryPointsAddSubCommand;
 import br.com.legion.glory.points.commands.subcommands.GloryPointsDefineSubCommand;
 import br.com.legion.glory.points.commands.subcommands.GloryPointsRemoveSubCommand;
 import br.com.legion.glory.points.commands.subcommands.GloryPointsTopSubCommand;
+import br.com.legion.glory.points.inventories.IndexInventory;
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
 import org.bukkit.command.CommandSender;
@@ -27,7 +29,7 @@ public class GloryPointsCommand extends CustomCommand {
     }
 
     @Override
-    public void onCommand(CommandSender sender, String[] args) {
+    public void onCommand(CommandSender sender, User user, String[] args) {
         if (args.length == 0) {
             if (!(sender instanceof Player)) {
                 return;
@@ -35,13 +37,17 @@ public class GloryPointsCommand extends CustomCommand {
 
             Player player = (Player) sender;
 
-            Double balance = GloryPointsAPI.get(player.getName());
+           /*
+           Double balance = GloryPointsAPI.get(player.getName());
             if (balance.isNaN() || balance.isInfinite()) {
                 Message.ERROR.send(player, "Seus pontos de glória estão inválidos, chame um membro da equipe urgente!");
                 return;
             }
 
             player.sendMessage("§eVocê possui: §f" + NumberUtils.format(balance) + " §epontos de glória.");
+            */
+
+            player.openInventory(new IndexInventory(user));
         } else if (args.length == 1) {
             if (!(sender instanceof Player)) {
                 return;

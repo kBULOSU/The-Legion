@@ -1,5 +1,10 @@
 package br.com.legion.glory.points;
 
+import br.com.idea.api.shared.ApiProvider;
+import br.com.legion.glory.points.transactions.Transaction;
+import br.com.legion.glory.points.transactions.TransactionType;
+
+import java.util.Date;
 import java.util.Map;
 
 public class GloryPointsAPI {
@@ -21,6 +26,16 @@ public class GloryPointsAPI {
 
         GloryPointsProvider.Repositories.GLORY_POINTS.provide().insertOrUpdate(name, points0 + points);
         GloryPointsProvider.Cache.Local.GLORY_POINTS.provide().invalidate(name);
+
+        GloryPointsProvider.Repositories.TRANSACTIONS.provide().insert(
+                ApiProvider.Cache.Local.USERS.provide().get(name).getId(),
+                new Transaction(
+                        null,
+                        TransactionType.RECEIVED,
+                        new Date(System.currentTimeMillis()),
+                        points
+                )
+        );
     }
 
     public static void withdraw(String name, double points) {
@@ -36,6 +51,16 @@ public class GloryPointsAPI {
 
         GloryPointsProvider.Repositories.GLORY_POINTS.provide().insertOrUpdate(name, newBalance);
         GloryPointsProvider.Cache.Local.GLORY_POINTS.provide().invalidate(name);
+
+        GloryPointsProvider.Repositories.TRANSACTIONS.provide().insert(
+                ApiProvider.Cache.Local.USERS.provide().get(name).getId(),
+                new Transaction(
+                        null,
+                        TransactionType.SENT,
+                        new Date(System.currentTimeMillis()),
+                        newBalance
+                )
+        );
     }
 
     public static void define(String name, double points) {
@@ -53,6 +78,6 @@ public class GloryPointsAPI {
     }
 
     public static Map<String, Double> getTop(int index) {
-        return GloryPointsProvider.Repositories.GLORY_POINTS.provide().fetchTop(index);
+        return GloryPointsProvider.Cache.Local.GLORY_POINTS.provide().getRank(index);
     }
 }
