@@ -2,7 +2,6 @@ package br.com.legion.glory.points.storage;
 
 import br.com.idea.api.shared.providers.MysqlDatabaseProvider;
 import br.com.idea.api.shared.storage.repositories.MysqlRepository;
-import br.com.legion.glory.points.storage.glorypoints.specs.*;
 import br.com.legion.glory.points.storage.specs.*;
 
 import java.util.Map;
