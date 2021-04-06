@@ -1,4 +1,4 @@
-package br.com.legion.glory.points.commands.subcommands;
+package br.com.legion.economy.commands.subcommands;
 
 import br.com.idea.api.shared.ApiProvider;
 import br.com.idea.api.shared.commands.Argument;
@@ -6,13 +6,13 @@ import br.com.idea.api.shared.commands.CommandRestriction;
 import br.com.idea.api.shared.user.User;
 import br.com.idea.api.spigot.commands.CustomCommand;
 import br.com.idea.api.spigot.misc.message.Message;
-import br.com.legion.glory.points.inventories.TransactionsInventory;
+import br.com.legion.economy.inventories.TransactionsInventory;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 
-public class GloryPointsTransactionsHistorySubCommand extends CustomCommand {
+public class EconomyTransactionsHistorySubCommand extends CustomCommand {
 
-    public GloryPointsTransactionsHistorySubCommand() {
+    public EconomyTransactionsHistorySubCommand() {
         super("historico", CommandRestriction.IN_GAME, "history");
 
         registerArgument(new Argument("nome", "", false));
@@ -26,7 +26,7 @@ public class GloryPointsTransactionsHistorySubCommand extends CustomCommand {
             target = args[0];
         }
 
-        if (!sender.hasPermission("glorypoints.admin") && !target.equals(sender.getName())) {
+        if (!sender.hasPermission("economy.admin") && !target.equals(sender.getName())) {
             Message.ERROR.send(sender, "Você não tem permissão para visualizar extratos de outros jogadores.");
             return;
         }

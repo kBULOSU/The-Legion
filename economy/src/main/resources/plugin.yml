@@ -1,0 +1,7 @@
+name: L-Economy
+author: yiatzz
+version: 0.1-ALPHA
+main: br.com.legion.economy.EconomyPlugin
+
+depend:
+  - API-Spigot

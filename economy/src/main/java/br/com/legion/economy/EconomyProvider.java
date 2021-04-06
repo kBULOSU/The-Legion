@@ -1,28 +1,28 @@
-package br.com.legion.glory.points;
+package br.com.legion.economy;
 
 import br.com.idea.api.shared.ApiProvider;
 import br.com.idea.api.shared.providers.LocalCacheProvider;
 import br.com.idea.api.shared.providers.MysqlRepositoryProvider;
-import br.com.legion.glory.points.cache.local.GloryPointsLocalCache;
-import br.com.legion.glory.points.storage.GloryPointsRepository;
-import br.com.legion.glory.points.transactions.local.TransactionsLocalCache;
-import br.com.legion.glory.points.transactions.storage.TransactionsRepository;
+import br.com.legion.economy.local.EconomyLocalCache;
+import br.com.legion.economy.storage.EconomyRepository;
+import br.com.legion.economy.transactions.cache.local.TransactionsLocalCache;
+import br.com.legion.economy.transactions.storage.TransactionsRepository;
 
-public class GloryPointsProvider {
+public class EconomyProvider {
 
     public static void prepare() {
-        Repositories.GLORY_POINTS.prepare();
+        Repositories.ECONOMY.prepare();
         Repositories.TRANSACTIONS.prepare();
 
-        Cache.Local.GLORY_POINTS.prepare();
+        Cache.Local.ECONOMY.prepare();
     }
 
     public static class Repositories {
 
-        public static final MysqlRepositoryProvider<GloryPointsRepository> GLORY_POINTS =
+        public static final MysqlRepositoryProvider<EconomyRepository> ECONOMY =
                 new MysqlRepositoryProvider<>(
                         () -> ApiProvider.Database.MySQL.MYSQL_MAIN,
-                        GloryPointsRepository.class
+                        EconomyRepository.class
                 );
 
         public static final MysqlRepositoryProvider<TransactionsRepository> TRANSACTIONS =
@@ -37,8 +37,8 @@ public class GloryPointsProvider {
 
         public static class Local {
 
-            public static final LocalCacheProvider<GloryPointsLocalCache> GLORY_POINTS =
-                    new LocalCacheProvider<>(new GloryPointsLocalCache());
+            public static final LocalCacheProvider<EconomyLocalCache> ECONOMY =
+                    new LocalCacheProvider<>(new EconomyLocalCache());
 
             public static final LocalCacheProvider<TransactionsLocalCache> TRANSACTIONS =
                     new LocalCacheProvider<>(new TransactionsLocalCache());

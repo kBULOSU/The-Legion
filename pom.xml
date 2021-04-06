@@ -14,6 +14,9 @@
         <module>guilds</module>
         <module>guilds-framework</module>
         <module>guilds-missions</module>
+        <module>economy</module>
+        <module>tablist</module>
+        <module>essentials</module>
     </modules>
 
     <properties>

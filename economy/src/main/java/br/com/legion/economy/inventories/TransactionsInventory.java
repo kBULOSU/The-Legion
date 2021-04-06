@@ -1,12 +1,12 @@
-package br.com.legion.glory.points.inventories;
+package br.com.legion.economy.inventories;
 
 import br.com.idea.api.shared.ApiProvider;
 import br.com.idea.api.shared.user.User;
 import br.com.idea.api.spigot.inventory.PaginateInventory;
 import br.com.idea.api.spigot.misc.utils.ItemBuilder;
-import br.com.legion.glory.points.GloryPointsProvider;
-import br.com.legion.glory.points.transactions.Transaction;
-import br.com.legion.glory.points.transactions.TransactionType;
+import br.com.legion.economy.EconomyProvider;
+import br.com.legion.economy.transactions.Transaction;
+import br.com.legion.economy.transactions.TransactionType;
 import org.bukkit.Material;
 import org.bukkit.inventory.ItemStack;
 
@@ -17,14 +17,14 @@ import java.util.Locale;
 public class TransactionsInventory extends PaginateInventory {
 
     public TransactionsInventory(User user) {
-        super("Histórico.", 6 * 9);
+        super("Histórico", 6 * 9);
 
-        List<Transaction> transactions0 = GloryPointsProvider.Cache.Local.TRANSACTIONS.provide().get(user.getId());
+        List<Transaction> transactions0 = EconomyProvider.Cache.Local.TRANSACTIONS.provide().get(user.getId());
         for (Transaction transaction : transactions0) {
             addItem(getTransactionIcon(transaction));
         }
 
-        backItem(new IndexInventory(ApiProvider.Cache.Local.USERS.provide().get(user.getId())));
+        backItem(new IndexInventory(user));
     }
 
     private ItemStack getTransactionIcon(Transaction transaction) {

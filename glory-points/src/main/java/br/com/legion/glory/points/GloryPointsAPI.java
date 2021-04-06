@@ -1,6 +1,7 @@
 package br.com.legion.glory.points;
 
 import br.com.idea.api.shared.ApiProvider;
+import br.com.idea.api.shared.user.User;
 import br.com.legion.glory.points.transactions.Transaction;
 import br.com.legion.glory.points.transactions.TransactionType;
 
@@ -27,8 +28,10 @@ public class GloryPointsAPI {
         GloryPointsProvider.Repositories.GLORY_POINTS.provide().insertOrUpdate(name, points0 + points);
         GloryPointsProvider.Cache.Local.GLORY_POINTS.provide().invalidate(name);
 
+        User user = ApiProvider.Cache.Local.USERS.provide().get(name);
+
         GloryPointsProvider.Repositories.TRANSACTIONS.provide().insert(
-                ApiProvider.Cache.Local.USERS.provide().get(name).getId(),
+                user.getId(),
                 new Transaction(
                         null,
                         TransactionType.RECEIVED,
@@ -36,6 +39,8 @@ public class GloryPointsAPI {
                         points
                 )
         );
+
+        GloryPointsProvider.Cache.Local.TRANSACTIONS.provide().invalidate(user.getId());
     }
 
     public static void withdraw(String name, double points) {
@@ -52,8 +57,10 @@ public class GloryPointsAPI {
         GloryPointsProvider.Repositories.GLORY_POINTS.provide().insertOrUpdate(name, newBalance);
         GloryPointsProvider.Cache.Local.GLORY_POINTS.provide().invalidate(name);
 
+        User user = ApiProvider.Cache.Local.USERS.provide().get(name);
+
         GloryPointsProvider.Repositories.TRANSACTIONS.provide().insert(
-                ApiProvider.Cache.Local.USERS.provide().get(name).getId(),
+                user.getId(),
                 new Transaction(
                         null,
                         TransactionType.SENT,
@@ -61,6 +68,8 @@ public class GloryPointsAPI {
                         newBalance
                 )
         );
+
+        GloryPointsProvider.Cache.Local.TRANSACTIONS.provide().invalidate(user.getId());
     }
 
     public static void define(String name, double points) {

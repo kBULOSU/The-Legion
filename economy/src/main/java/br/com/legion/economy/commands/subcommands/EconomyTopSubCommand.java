@@ -1,18 +1,18 @@
-package br.com.legion.glory.points.commands.subcommands;
+package br.com.legion.economy.commands.subcommands;
 
 import br.com.idea.api.shared.commands.CommandRestriction;
 import br.com.idea.api.shared.misc.utils.NumberUtils;
 import br.com.idea.api.spigot.commands.CustomCommand;
-import br.com.legion.glory.points.GloryPointsProvider;
+import br.com.legion.economy.EconomyProvider;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 
 import java.util.Map;
 import java.util.concurrent.atomic.AtomicInteger;
 
-public class GloryPointsTopSubCommand extends CustomCommand {
+public class EconomyTopSubCommand extends CustomCommand {
 
-    public GloryPointsTopSubCommand() {
+    public EconomyTopSubCommand() {
         super("top", CommandRestriction.IN_GAME, "rank");
     }
 
@@ -23,12 +23,12 @@ public class GloryPointsTopSubCommand extends CustomCommand {
         message.append("\n")
                 .append(ChatColor.YELLOW)
                 .append("Top 10 jogadores com mais ")
-                .append("Pontos de Glória")
+                .append("Coins")
                 .append("\n \n");
 
         AtomicInteger count = new AtomicInteger(1);
 
-        for (Map.Entry<String, Double> entry : GloryPointsProvider.Cache.Local.GLORY_POINTS.provide().getRank(10).entrySet()) {
+        for (Map.Entry<String, Double> entry : EconomyProvider.Cache.Local.ECONOMY.provide().getRank(10).entrySet()) {
             String name = entry.getKey();
             Double points = entry.getValue();
 
