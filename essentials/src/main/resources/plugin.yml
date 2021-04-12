@@ -1,0 +1,9 @@
+name: L-Essentials
+author: yiatzz
+version: 0.1-ALPHA
+main: br.com.legion.essentials.EssentialsPlugin
+
+load: POSTWORLD
+
+depend:
+  - API-Spigot

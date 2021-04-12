@@ -1,0 +1,7 @@
+name: L-TabList
+author: yiatzz
+version: 0.1-ALPHA
+main: br.com.legion.tablist.TablistPlugin
+
+depend:
+  - helper

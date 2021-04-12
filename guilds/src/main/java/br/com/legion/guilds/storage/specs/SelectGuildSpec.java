@@ -20,8 +20,9 @@ public abstract class SelectGuildSpec extends SelectSqlSpec<Guild> {
                 Date createdAt = result.getTimestamp("created_at");
                 int maxMembers = result.getInt("max_members");
                 double gloryPoints = result.getDouble("gloryPoints");
+                long lastMaintenance = result.getTimestamp("lastMaintenance").getTime();
 
-                Guild guild = new Guild(id, tag, name, level, maxMembers, gloryPoints, createdAt);
+                Guild guild = new Guild(id, tag, name, level, maxMembers, gloryPoints, createdAt, lastMaintenance);
 
                 return guild;
             }

@@ -92,7 +92,7 @@ public class GuildMaintenanceRunnable implements Runnable {
     }
 
     private void downgradeLevel() {
-        guild.setLevel(Math.min(1, guild.getLevel()));
+        guild.downgradeLevel();
 
         Integer id = guild.getId();
 

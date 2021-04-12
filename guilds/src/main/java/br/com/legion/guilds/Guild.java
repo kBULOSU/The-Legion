@@ -47,6 +47,7 @@ public class Guild {
         this.createdAt = createdAt;
         this.gloryPoints = 0.0;
         this.bankLimit = GuildsConstants.Config.getBankLimitByLevel(level);
+        this.lastMaintenance = 0L;
     }
 
     public Guild(Integer id, String tag, String name, int level, int maxMembers, double gloryPoints, Date createdAt) {
@@ -58,6 +59,19 @@ public class Guild {
         this.gloryPoints = gloryPoints;
         this.bankLimit = GuildsConstants.Config.getBankLimitByLevel(level);
         this.createdAt = createdAt;
+        this.lastMaintenance = 0L;
+    }
+
+    public Guild(Integer id, String tag, String name, int level, int maxMembers, double gloryPoints, Date createdAt, long lastMaintenance) {
+        this.id = id;
+        this.tag = tag;
+        this.name = name;
+        this.level = level;
+        this.maxMembers = maxMembers;
+        this.gloryPoints = gloryPoints;
+        this.bankLimit = GuildsConstants.Config.getBankLimitByLevel(level);
+        this.createdAt = createdAt;
+        this.lastMaintenance = lastMaintenance;
     }
 
     public String getDisplayName() {
@@ -71,9 +85,15 @@ public class Guild {
     }
 
     public void upgradeLevel() {
+        this.level++;
         this.maxMembers = GuildsConstants.Config.getMaxMembersByLevel(this.level);
         this.bankLimit = GuildsConstants.Config.getBankLimitByLevel(this.level);
-        this.level++;
+    }
+
+    public void downgradeLevel() {
+        this.level--;
+        this.maxMembers = GuildsConstants.Config.getMaxMembersByLevel(this.level);
+        this.bankLimit = GuildsConstants.Config.getBankLimitByLevel(this.level);
     }
 
     public boolean needMaintenance() {
