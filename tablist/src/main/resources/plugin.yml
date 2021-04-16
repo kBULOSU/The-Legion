@@ -1,7 +1,5 @@
-name: L-TabList
-author: yiatzz
-version: 0.1-ALPHA
-main: br.com.legion.tablist.TablistPlugin
-
-depend:
-  - helper
+name: NametagEdit
+main: com.nametagedit.plugin.NametagEdit
+version: 4.4.10
+authors: [ sgtcaze, Cory, yiatzz ]
+soft-depend: [ LuckPerms ]
