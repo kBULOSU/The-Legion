@@ -19,6 +19,11 @@
 
     <repositories>
         <repository>
+            <id>lucko-repo</id>
+            <url>https://repo.lucko.me/</url>
+        </repository>
+
+        <repository>
             <id>focamacho-repo</id>
             <name>Focamacho Maven Repository</name>
             <url>https://repo.focamacho.com/repository/releases/</url>
@@ -30,6 +35,13 @@
             <groupId>com.focamacho</groupId>
             <artifactId>sealconfig</artifactId>
             <version>1.2.2</version>
+        </dependency>
+
+        <dependency>
+            <groupId>me.lucko</groupId>
+            <artifactId>helper</artifactId>
+            <version>5.6.6</version>
+            <scope>provided</scope>
         </dependency>
     </dependencies>
 

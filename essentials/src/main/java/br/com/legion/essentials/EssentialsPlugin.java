@@ -2,9 +2,17 @@ package br.com.legion.essentials;
 
 import br.com.legion.essentials.config.EssentialsConfig;
 import lombok.Getter;
-import org.bukkit.plugin.java.JavaPlugin;
+import me.lucko.helper.plugin.ExtendedJavaPlugin;
+import me.lucko.helper.plugin.ap.Plugin;
+import me.lucko.helper.plugin.ap.PluginDependency;
 
-public class EssentialsPlugin extends JavaPlugin {
+@Plugin(
+        name = "L-Essentials",
+        version = "0.0.1",
+        authors = "yiatzz",
+        depends = @PluginDependency("helper")
+)
+public class EssentialsPlugin extends ExtendedJavaPlugin {
 
     @Getter
     private static EssentialsPlugin instance;
@@ -13,7 +21,7 @@ public class EssentialsPlugin extends JavaPlugin {
     private static EssentialsConfig config;
 
     @Override
-    public void onEnable() {
+    protected void enable() {
         super.onEnable();
 
         instance = this;

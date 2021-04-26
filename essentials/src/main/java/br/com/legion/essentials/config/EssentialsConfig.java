@@ -8,6 +8,8 @@ public class EssentialsConfig {
 
     public static void loadConfig() {
         config = new SealConfig();
+
+
     }
 
     public static void reloadConfig() {
