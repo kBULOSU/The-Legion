@@ -33,7 +33,9 @@ public class TablistManager {
     private static BaseComponent[] HEADER;
     private static BaseComponent[] FOOTER;
 
-    public TablistManager(TablistPlugin plugin) {
+    private static final MetadataKey<PlayerTab> TAB_KEY = MetadataKey.create("rank-tab", PlayerTab.class);
+
+    public static void enable(TablistPlugin plugin) {
         try {
             Path resolve = plugin.getDataFolder().toPath().resolve("config.conf");
 
@@ -72,11 +74,9 @@ public class TablistManager {
         } catch (ObjectMappingException e) {
             e.printStackTrace();
         }
-    }
 
-    private static final MetadataKey<PlayerTab> TAB_KEY = MetadataKey.create("rank-tab", PlayerTab.class);
+        ///////////
 
-    public static void enable(TablistPlugin plugin) {
         PacketScoreboard scoreboard = Services.load(PacketScoreboardProvider.class).getScoreboard();
 
         Events.subscribe(PlayerJoinEvent.class)
